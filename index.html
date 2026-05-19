@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon — Game Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #020308;
+      --primary: #00f0ff;
+      --accent: #ff2d6b;
+      --gold: #ffd700;
+      --text: #e0e8f0;
+      --dim: #4a5568;
+      --glow-cyan: 0 0 20px #00f0ff88, 0 0 60px #00f0ff33;
+      --glow-red: 0 0 20px #ff2d6b88, 0 0 60px #ff2d6b33;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Animated grid background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,240,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,240,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 20s linear infinite;
+      z-index: 0;
+    }
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    /* Scanlines overlay */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.15) 2px,
+        rgba(0,0,0,0.15) 4px
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Radial glow center */
+    .radial-glow {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,240,255,0.07) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    /* Corner decorations */
+    .corner {
+      position: fixed;
+      width: 80px;
+      height: 80px;
+      z-index: 2;
+    }
+    .corner::before, .corner::after {
+      content: '';
+      position: absolute;
+      background: var(--primary);
+      box-shadow: var(--glow-cyan);
+    }
+    .corner::before { width: 2px; height: 100%; }
+    .corner::after  { width: 100%; height: 2px; }
+    .corner.tl { top: 24px; left: 24px; }
+    .corner.tr { top: 24px; right: 24px; transform: scaleX(-1); }
+    .corner.bl { bottom: 24px; left: 24px; transform: scaleY(-1); }
+    .corner.br { bottom: 24px; right: 24px; transform: scale(-1); }
+
+    /* Main layout */
+    .stage {
+      position: relative;
+      z-index: 3;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* Top badge */
+    .badge {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--primary);
+      border: 1px solid rgba(0,240,255,0.3);
+      padding: 0.4rem 1.2rem;
+      margin-bottom: 1.8rem;
+      animation: fadeSlideDown 0.8s ease both;
+      position: relative;
+    }
+    .badge::before, .badge::after {
+      content: '//';
+      color: var(--accent);
+      margin: 0 0.5rem;
+    }
+
+    /* Hero title */
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 13rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: white;
+      position: relative;
+      animation: fadeSlideUp 0.9s ease 0.1s both;
+    }
+    .hero-title .line1 { display: block; }
+    .hero-title .line2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--primary);
+      text-shadow: var(--glow-cyan);
+    }
+
+    /* Glitch effect on hover */
+    .hero-title:hover .line2 {
+      animation: glitch 0.3s steps(2) infinite;
+    }
+    @keyframes glitch {
+      0%   { text-shadow: -3px 0 var(--accent), 3px 0 var(--primary); transform: translate(-2px,0); }
+      50%  { text-shadow: 3px 0 var(--accent), -3px 0 var(--primary); transform: translate(2px,0); }
+      100% { text-shadow: var(--glow-cyan); transform: translate(0,0); }
+    }
+
+    /* Divider */
+    .divider {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+      margin: 1.5rem auto;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+
+    /* Subtitle */
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      animation: fadeIn 1s ease 0.4s both;
+      margin-bottom: 2.5rem;
+    }
+    .subtitle span { color: var(--gold); }
+
+
+
+    /* Footer tags */
+    .tags {
+      position: fixed;
+      bottom: 2.5rem;
+      display: flex;
+      gap: 1.2rem;
+      z-index: 5;
+      animation: fadeIn 1.2s ease 0.8s both;
+    }
+    .tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.3rem 0.8rem;
+    }
+    .tag.hot { color: var(--accent); border-color: rgba(255,45,107,0.3); }
+
+    /* Floating particles */
+    .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+    }
+
+    /* Keyframes */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .countdown { gap: 0.8rem; }
+      .notify-row { flex-direction: column; }
+      .notify-input { border-right: 1px solid rgba(0,240,255,0.25); border-bottom: none; width: 100%; }
+      .notify-btn { width: 100%; }
+      .tags { gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div class="radial-glow"></div>
+  <div class="scanlines"></div>
+
+  <!-- Corner brackets -->
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <div class="stage">
+    <div class="badge">A New Quest Awaits</div>
+
+    <h1 class="hero-title">
+      <span class="line1">Coming</span>
+      <span class="line2">Soon</span>
+    </h1>
+
+    <div class="divider"></div>
+
+    <p class="subtitle">
+      Your choice. <span>Your destiny.</span> The adventure begins soon.
+    </p>
+
+
+  </div>
+
+  <div class="tags">
+    <span class="tag">RPG</span>
+    <span class="tag hot">⚔️ Coming Soon</span>
+    <span class="tag">rupesh-joshi.com.np</span>
+  </div>
+
+  <script>
+// Generate floating particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 35; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (6 + Math.random() * 12) + 's';
+      p.style.animationDelay    = (Math.random() * 10) + 's';
+      p.style.width  = (Math.random() > 0.7 ? 3 : 2) + 'px';
+      p.style.height = p.style.width;
+      // Alternate a few particles to accent color
+      if (Math.random() > 0.75) p.style.background = '#ff2d6b';
+      container.appendChild(p);
+    }
+  </script>
+</body>
+</html>
