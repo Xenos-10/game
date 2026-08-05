@@ -1,289 +1,2475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Coming Soon — Game Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dharmadevas Blade — Text RPG</title>
+
+  <meta
+    name="description"
+    content="Dharmadevas Blade — a story-driven text RPG inspired by ancient Nepal."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg: #020308;
-      --primary: #00f0ff;
-      --accent: #ff2d6b;
-      --gold: #ffd700;
-      --text: #e0e8f0;
-      --dim: #4a5568;
-      --glow-cyan: 0 0 20px #00f0ff88, 0 0 60px #00f0ff33;
-      --glow-red: 0 0 20px #ff2d6b88, 0 0 60px #ff2d6b33;
+      --bg-soft: #070a10;
+      --panel: rgba(7, 11, 18, 0.88);
+
+      --cyan: #00f0ff;
+      --cyan-soft: #75f7ff;
+
+      --pink: #ff2d6b;
+      --pink-soft: #ff7198;
+
+      --gold: #ffd166;
+
+      --white: #edf5f7;
+      --text: #c6d1d5;
+      --muted: #66727a;
+      --dark: #111820;
+
+      --border: rgba(0, 240, 255, 0.18);
+
+      --max-width: 1180px;
+
+      --cyan-glow:
+        0 0 15px rgba(0, 240, 255, 0.45),
+        0 0 45px rgba(0, 240, 255, 0.12);
+
+      --pink-glow:
+        0 0 15px rgba(255, 45, 107, 0.45),
+        0 0 45px rgba(255, 45, 107, 0.12);
     }
 
-    html, body {
-      height: 100%;
-      background: var(--bg);
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          ellipse at 50% 0%,
+          rgba(0, 240, 255, 0.07),
+          transparent 45%
+        ),
+        var(--bg);
+
       color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
+
+      font-family: "Rajdhani", sans-serif;
+
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+
+      z-index: -10;
+
+      pointer-events: none;
+
       overflow: hidden;
     }
 
-    /* Animated grid background */
-    .grid-bg {
-      position: fixed;
+    .grid {
+      position: absolute;
       inset: 0;
+
       background-image:
-        linear-gradient(rgba(0,240,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,240,255,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: gridMove 20s linear infinite;
-      z-index: 0;
-    }
-    @keyframes gridMove {
-      0% { background-position: 0 0; }
-      100% { background-position: 60px 60px; }
+        linear-gradient(
+          rgba(0, 240, 255, 0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(0, 240, 255, 0.035) 1px,
+          transparent 1px
+        );
+
+      background-size: 55px 55px;
+
+      animation: gridMove 22s linear infinite;
     }
 
-    /* Scanlines overlay */
+    @keyframes gridMove {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 55px 55px;
+      }
+    }
+
+    .glow {
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      left: 50%;
+      top: 20%;
+
+      transform: translate(-50%, -50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(0, 240, 255, 0.06),
+          transparent 68%
+        );
+    }
+
     .scanlines {
-      position: fixed;
+      position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.15) 2px,
-        rgba(0,0,0,0.15) 4px
-      );
-      z-index: 1;
+
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+
+      opacity: 0.45;
+    }
+
+    .particle {
+      position: absolute;
+
+      width: 2px;
+      height: 2px;
+
+      border-radius: 50%;
+
+      background: var(--cyan);
+
+      opacity: 0;
+
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(105vh);
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 0.5;
+      }
+
+      85% {
+        opacity: 0.25;
+      }
+
+      100% {
+        transform:
+          translateY(-10vh)
+          translateX(40px);
+
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================================================
+       CORNER DECORATIONS
+    ========================================================= */
+
+    .corner {
+      position: fixed;
+
+      width: 55px;
+      height: 55px;
+
+      z-index: 20;
+
       pointer-events: none;
     }
 
-    /* Radial glow center */
-    .radial-glow {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,240,255,0.07) 0%, transparent 70%);
-      z-index: 0;
-    }
+    .corner::before,
+    .corner::after {
+      content: "";
 
-    /* Corner decorations */
-    .corner {
-      position: fixed;
-      width: 80px;
-      height: 80px;
-      z-index: 2;
-    }
-    .corner::before, .corner::after {
-      content: '';
       position: absolute;
-      background: var(--primary);
-      box-shadow: var(--glow-cyan);
-    }
-    .corner::before { width: 2px; height: 100%; }
-    .corner::after  { width: 100%; height: 2px; }
-    .corner.tl { top: 24px; left: 24px; }
-    .corner.tr { top: 24px; right: 24px; transform: scaleX(-1); }
-    .corner.bl { bottom: 24px; left: 24px; transform: scaleY(-1); }
-    .corner.br { bottom: 24px; right: 24px; transform: scale(-1); }
 
-    /* Main layout */
-    .stage {
-      position: relative;
-      z-index: 3;
-      height: 100vh;
+      background: var(--cyan);
+
+      box-shadow: var(--cyan-glow);
+    }
+
+    .corner::before {
+      width: 1px;
+      height: 100%;
+    }
+
+    .corner::after {
+      width: 100%;
+      height: 1px;
+    }
+
+    .corner.tl {
+      top: 18px;
+      left: 18px;
+    }
+
+    .corner.tr {
+      top: 18px;
+      right: 18px;
+
+      transform: scaleX(-1);
+    }
+
+    .corner.bl {
+      bottom: 18px;
+      left: 18px;
+
+      transform: scaleY(-1);
+    }
+
+    .corner.br {
+      bottom: 18px;
+      right: 18px;
+
+      transform: scale(-1);
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    header {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 100;
+
+      background:
+        rgba(2, 3, 8, 0.78);
+
+      border-bottom:
+        1px solid rgba(0, 240, 255, 0.12);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .nav {
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
+
+      height: 70px;
+
+      margin: auto;
+
       display: flex;
-      flex-direction: column;
+
       align-items: center;
-      justify-content: center;
-      gap: 0;
-      padding: 2rem;
-      text-align: center;
+
+      justify-content: space-between;
     }
 
-    /* Top badge */
-    .badge {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--primary);
-      border: 1px solid rgba(0,240,255,0.3);
-      padding: 0.4rem 1.2rem;
-      margin-bottom: 1.8rem;
-      animation: fadeSlideDown 0.8s ease both;
-      position: relative;
-    }
-    .badge::before, .badge::after {
-      content: '//';
-      color: var(--accent);
-      margin: 0 0.5rem;
-    }
-
-    /* Hero title */
-    .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 15vw, 13rem);
-      line-height: 0.88;
-      letter-spacing: 0.02em;
-      color: white;
-      position: relative;
-      animation: fadeSlideUp 0.9s ease 0.1s both;
-    }
-    .hero-title .line1 { display: block; }
-    .hero-title .line2 {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 2px var(--primary);
-      text-shadow: var(--glow-cyan);
-    }
-
-    /* Glitch effect on hover */
-    .hero-title:hover .line2 {
-      animation: glitch 0.3s steps(2) infinite;
-    }
-    @keyframes glitch {
-      0%   { text-shadow: -3px 0 var(--accent), 3px 0 var(--primary); transform: translate(-2px,0); }
-      50%  { text-shadow: 3px 0 var(--accent), -3px 0 var(--primary); transform: translate(2px,0); }
-      100% { text-shadow: var(--glow-cyan); transform: translate(0,0); }
-    }
-
-    /* Divider */
-    .divider {
-      width: 200px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
-      margin: 1.5rem auto;
-      animation: fadeIn 1s ease 0.3s both;
-    }
-
-    /* Subtitle */
-    .subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-      animation: fadeIn 1s ease 0.4s both;
-      margin-bottom: 2.5rem;
-    }
-    .subtitle span { color: var(--gold); }
-
-
-
-    /* Footer tags */
-    .tags {
-      position: fixed;
-      bottom: 2.5rem;
+    .logo {
       display: flex;
-      gap: 1.2rem;
-      z-index: 5;
-      animation: fadeIn 1.2s ease 0.8s both;
+
+      align-items: center;
+
+      gap: 12px;
     }
-    .tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+
+    .logo-symbol {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+
+      place-items: center;
+
+      border:
+        1px solid var(--cyan);
+
+      color: var(--cyan);
+
+      font-size: 0.8rem;
+
+      box-shadow: var(--cyan-glow);
+
+      transform: rotate(45deg);
+    }
+
+    .logo-symbol span {
+      transform: rotate(-45deg);
+    }
+
+    .logo-name {
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size: 1.15rem;
+
+      letter-spacing: 0.08em;
+    }
+
+    .logo-name small {
+      display: block;
+
+      color: var(--cyan);
+
+      font-family: "Rajdhani", sans-serif;
+
+      font-size: 0.52rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.25em;
+    }
+
+    .nav-links {
+      display: flex;
+
+      align-items: center;
+
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.15em;
+
       text-transform: uppercase;
-      color: var(--dim);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 0.3rem 0.8rem;
-    }
-    .tag.hot { color: var(--accent); border-color: rgba(255,45,107,0.3); }
 
-    /* Floating particles */
-    .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: var(--primary);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .nav-download {
+      padding: 9px 17px;
+
+      border:
+        1px solid rgba(0, 240, 255, 0.35);
+
+      color: var(--cyan) !important;
+
+      background:
+        rgba(0, 240, 255, 0.04);
+
+      box-shadow:
+        inset 0 0 20px rgba(0, 240, 255, 0.025);
+    }
+
+    .nav-download:hover {
+      background:
+        rgba(0, 240, 255, 0.12);
+    }
+
+
+    /* =========================================================
+       GAME HEADER
+    ========================================================= */
+
+    .game-header {
+      position: relative;
+
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
+
+      margin: auto;
+
+      padding:
+        145px
+        0
+        95px;
+    }
+
+    .status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 20px;
+
+      padding: 6px 12px;
+
+      border:
+        1px solid rgba(0, 240, 255, 0.25);
+
+      color: var(--cyan);
+
+      background:
+        rgba(0, 240, 255, 0.035);
+
+      font-size: 0.65rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+
       border-radius: 50%;
-      animation: floatUp linear infinite;
+
+      background: #39ff88;
+
+      box-shadow:
+        0 0 10px #39ff88;
+
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.35;
+      }
+    }
+
+    .game-title {
+      max-width: 900px;
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size:
+        clamp(4rem, 11vw, 9.5rem);
+
+      line-height: 0.83;
+
+      letter-spacing: 0.025em;
+
+      color: var(--white);
+    }
+
+    .game-title span {
+      display: block;
+    }
+
+    .game-title .accent {
+      color: transparent;
+
+      -webkit-text-stroke:
+        1.5px var(--cyan);
+
+      text-shadow:
+        var(--cyan-glow);
+    }
+
+    .game-type {
+      margin-top: 25px;
+
+      color: var(--pink);
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.28em;
+
+      text-transform: uppercase;
+    }
+
+    .game-description {
+      max-width: 650px;
+
+      margin-top: 20px;
+
+      color: #9ba8ae;
+
+      font-size: 1.02rem;
+
+      line-height: 1.75;
+    }
+
+    .game-actions {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-width: 190px;
+
+      padding: 14px 24px;
+
+      border: 1px solid;
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.17em;
+
+      text-transform: uppercase;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: #020308;
+
+      border-color: var(--cyan);
+
+      background: var(--cyan);
+
+      box-shadow: var(--cyan-glow);
+    }
+
+    .button-primary:hover {
+      background: var(--cyan-soft);
+
+      box-shadow:
+        0 0 25px rgba(0, 240, 255, 0.55);
+    }
+
+    .button-secondary {
+      color: var(--text);
+
+      border-color:
+        rgba(255, 255, 255, 0.13);
+
+      background:
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .button-secondary:hover {
+      border-color:
+        rgba(255, 45, 107, 0.55);
+
+      color: var(--pink-soft);
+    }
+
+    .release-info {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 30px;
+
+      margin-top: 35px;
+
+      color: var(--muted);
+
+      font-size: 0.63rem;
+
+      letter-spacing: 0.13em;
+
+      text-transform: uppercase;
+    }
+
+    .release-info strong {
+      display: block;
+
+      margin-bottom: 4px;
+
+      color: var(--cyan);
+
+      font-size: 0.7rem;
+    }
+
+
+    /* =========================================================
+       CONTENT
+    ========================================================= */
+
+    main {
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
+
+      margin: auto;
+    }
+
+    section {
+      padding: 95px 0;
+
+      border-top:
+        1px solid rgba(0, 240, 255, 0.09);
+    }
+
+    .section-label {
+      margin-bottom: 12px;
+
+      color: var(--cyan);
+
+      font-size: 0.62rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.3em;
+
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size:
+        clamp(2.5rem, 5vw, 4.5rem);
+
+      line-height: 0.95;
+
+      letter-spacing: 0.025em;
+    }
+
+    .section-description {
+      max-width: 680px;
+
+      margin-top: 15px;
+
+      color: var(--muted);
+
+      font-size: 0.95rem;
+
+      line-height: 1.8;
+    }
+
+    .section-heading {
+      margin-bottom: 42px;
+    }
+
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.2fr
+        0.8fr;
+
+      gap: 60px;
+    }
+
+    .about-copy p {
+      margin-bottom: 18px;
+
+      color: #aeb9bd;
+
+      font-size: 0.98rem;
+
+      line-height: 1.9;
+    }
+
+    .terminal {
+      padding: 25px;
+
+      border:
+        1px solid rgba(0, 240, 255, 0.2);
+
+      background:
+        rgba(0, 0, 0, 0.35);
+
+      box-shadow:
+        inset 0 0 35px rgba(0, 240, 255, 0.025);
+    }
+
+    .terminal-bar {
+      display: flex;
+
+      gap: 7px;
+
+      margin-bottom: 22px;
+    }
+
+    .terminal-bar span {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--muted);
+    }
+
+    .terminal-content {
+      color: #8ea0a6;
+
+      font-family: monospace;
+
+      font-size: 0.75rem;
+
+      line-height: 2;
+    }
+
+    .terminal-content .green {
+      color: #48ff9a;
+    }
+
+    .terminal-content .blue {
+      color: var(--cyan);
+    }
+
+    .terminal-content .pink {
+      color: var(--pink);
+    }
+
+
+    /* =========================================================
+       GAMEPLAY SYSTEMS
+    ========================================================= */
+
+    .systems {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
+    }
+
+    .system {
+      min-height: 210px;
+
+      padding: 28px;
+
+      border:
+        1px solid rgba(0, 240, 255, 0.13);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(0, 240, 255, 0.025),
+          rgba(255, 45, 107, 0.015)
+        );
+
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .system:hover {
+      transform: translateY(-4px);
+
+      border-color:
+        rgba(0, 240, 255, 0.42);
+    }
+
+    .system-number {
+      color: var(--pink);
+
+      font-size: 0.62rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.2em;
+    }
+
+    .system h3 {
+      margin-top: 28px;
+
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size: 1.65rem;
+
+      letter-spacing: 0.04em;
+    }
+
+    .system p {
+      margin-top: 9px;
+
+      color: var(--muted);
+
+      font-size: 0.82rem;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================================================
+       CHAPTERS
+    ========================================================= */
+
+    .chapters {
+      display: grid;
+
+      gap: 1px;
+
+      background:
+        rgba(0, 240, 255, 0.13);
+
+      border:
+        1px solid rgba(0, 240, 255, 0.13);
+    }
+
+    .chapter {
+      display: grid;
+
+      grid-template-columns:
+        100px
+        1fr
+        120px;
+
+      align-items: center;
+
+      gap: 20px;
+
+      padding: 24px 28px;
+
+      background:
+        var(--bg-soft);
+
+      transition:
+        background 0.2s ease;
+    }
+
+    .chapter:hover {
+      background:
+        rgba(0, 240, 255, 0.035);
+    }
+
+    .chapter-number {
+      color: var(--cyan);
+
+      font-size: 0.65rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.15em;
+    }
+
+    .chapter h3 {
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size: 1.5rem;
+
+      letter-spacing: 0.04em;
+    }
+
+    .chapter p {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 0.75rem;
+    }
+
+    .chapter-status {
+      color: #42ff91;
+
+      font-size: 0.58rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.15em;
+
+      text-align: right;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       SCREENSHOTS
+    ========================================================= */
+
+    .screenshots {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
+    }
+
+    .screenshot {
+      position: relative;
+
+      aspect-ratio: 16 / 10;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      padding: 18px;
+
+      overflow: hidden;
+
+      border:
+        1px solid rgba(0, 240, 255, 0.13);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(0, 240, 255, 0.04),
+          rgba(255, 45, 107, 0.035)
+        ),
+        #070a0e;
+    }
+
+    .screenshot::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(0, 240, 255, 0.04) 50%,
+          transparent 100%
+        );
+    }
+
+    .screenshot-label {
+      position: relative;
+
+      color: var(--muted);
+
+      font-size: 0.6rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+    }
+
+    .screenshot.wide {
+      grid-column: span 2;
+    }
+
+
+    /* =========================================================
+       DOWNLOAD
+    ========================================================= */
+
+    .download {
+      padding-bottom: 110px;
+    }
+
+    .download-panel {
+      position: relative;
+
+      padding: 50px;
+
+      overflow: hidden;
+
+      border:
+        1px solid rgba(0, 240, 255, 0.28);
+
+      background:
+        radial-gradient(
+          circle at 85% 50%,
+          rgba(255, 45, 107, 0.09),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 15% 50%,
+          rgba(0, 240, 255, 0.07),
+          transparent 40%
+        ),
+        #05080c;
+    }
+
+    .download-panel::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 0;
+
+      width: 100%;
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--cyan),
+          var(--pink),
+          transparent
+        );
+    }
+
+    .download-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        auto;
+
+      align-items: center;
+
+      gap: 50px;
+    }
+
+    .download-title {
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size: 3rem;
+
+      letter-spacing: 0.04em;
+    }
+
+    .download-text {
+      max-width: 650px;
+
+      margin-top: 10px;
+
+      color: var(--muted);
+
+      line-height: 1.75;
+    }
+
+    .download-meta {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 25px;
+
+      margin-top: 23px;
+
+      color: var(--muted);
+
+      font-size: 0.6rem;
+
+      font-weight: 600;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+    }
+
+    .download-meta strong {
+      color: var(--cyan);
+    }
+
+    .download-button {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-width: 245px;
+
+      padding: 18px 25px;
+
+      color: #020308;
+
+      background: var(--cyan);
+
+      border:
+        1px solid var(--cyan);
+
+      font-size: 0.72rem;
+
+      font-weight: 800;
+
+      letter-spacing: 0.16em;
+
+      text-transform: uppercase;
+
+      box-shadow: var(--cyan-glow);
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .download-button:hover {
+      transform: translateY(-2px);
+
+      background: var(--cyan-soft);
+    }
+
+
+    /* =========================================================
+       ROADMAP
+    ========================================================= */
+
+    .roadmap {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
+    }
+
+    .roadmap-item {
+      padding: 28px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+      background:
+        rgba(255,255,255,0.015);
+    }
+
+    .roadmap-item.active {
+      border-color:
+        rgba(0, 240, 255, 0.32);
+    }
+
+    .roadmap-status {
+      color: var(--cyan);
+
+      font-size: 0.58rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+    }
+
+    .roadmap-item h3 {
+      margin-top: 18px;
+
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size: 1.6rem;
+
+      letter-spacing: 0.04em;
+    }
+
+    .roadmap-item p {
+      margin-top: 8px;
+
+      color: var(--muted);
+
+      font-size: 0.78rem;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      border-top:
+        1px solid rgba(0, 240, 255, 0.1);
+
+      background:
+        #010205;
+    }
+
+    .footer {
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
+
+      margin: auto;
+
+      padding: 45px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 30px;
+    }
+
+    .footer-title {
+      color: var(--white);
+
+      font-family: "Bebas Neue", sans-serif;
+
+      font-size: 1.4rem;
+
+      letter-spacing: 0.08em;
+    }
+
+    .footer-title span {
+      display: block;
+
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-family: "Rajdhani", sans-serif;
+
+      font-size: 0.62rem;
+
+      letter-spacing: 0.12em;
+    }
+
+    .footer-links {
+      display: flex;
+
+      gap: 25px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+
+      font-size: 0.63rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.13em;
+
+      text-transform: uppercase;
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
+
+    .copyright {
+      padding: 18px;
+
+      border-top:
+        1px solid rgba(255,255,255,0.04);
+
+      color: #414a50;
+
+      font-size: 0.57rem;
+
+      letter-spacing: 0.1em;
+
+      text-align: center;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
       opacity: 0;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.3; }
-      100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+
+      transform: translateY(22px);
+
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
     }
 
-    /* Keyframes */
-    @keyframes fadeSlideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
+    .reveal.visible {
+      opacity: 1;
+
+      transform: translateY(0);
     }
 
-    /* Responsive tweaks */
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 850px) {
+
+      .nav-links a:not(.nav-download) {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+      }
+
+      .systems {
+        grid-template-columns: 1fr;
+      }
+
+      .screenshots {
+        grid-template-columns: 1fr;
+      }
+
+      .screenshot.wide {
+        grid-column: span 1;
+      }
+
+      .download-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+    }
+
     @media (max-width: 600px) {
-      .countdown { gap: 0.8rem; }
-      .notify-row { flex-direction: column; }
-      .notify-input { border-right: 1px solid rgba(0,240,255,0.25); border-bottom: none; width: 100%; }
-      .notify-btn { width: 100%; }
-      .tags { gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+
+      .game-header {
+        width:
+          calc(100% - 32px);
+
+        padding-top: 125px;
+      }
+
+      main {
+        width:
+          calc(100% - 32px);
+      }
+
+      .game-title {
+        font-size: 4.2rem;
+      }
+
+      .game-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .release-info {
+        gap: 18px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .chapter {
+        grid-template-columns:
+          75px
+          1fr;
+      }
+
+      .chapter-status {
+        grid-column: 2;
+
+        text-align: left;
+      }
+
+      .download-panel {
+        padding: 30px 22px;
+      }
+
+      .download-button {
+        width: 100%;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
     }
+
   </style>
 </head>
+
+
 <body>
 
-  <div class="grid-bg"></div>
-  <div class="radial-glow"></div>
-  <div class="scanlines"></div>
+  <!-- =======================================================
+       BACKGROUND
+  ======================================================== -->
 
-  <!-- Corner brackets -->
+  <div class="background">
+
+    <div class="grid"></div>
+
+    <div class="glow"></div>
+
+    <div class="scanlines"></div>
+
+  </div>
+
+
+  <!-- =======================================================
+       CORNERS
+  ======================================================== -->
+
   <div class="corner tl"></div>
   <div class="corner tr"></div>
   <div class="corner bl"></div>
   <div class="corner br"></div>
 
-  <!-- Particles -->
-  <div class="particles" id="particles"></div>
 
-  <div class="stage">
-    <div class="badge">A New Quest Awaits</div>
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
 
-    <h1 class="hero-title">
-      <span class="line1">Coming</span>
-      <span class="line2">Soon</span>
+  <header>
+
+    <nav class="nav">
+
+      <a
+        href="#top"
+        class="logo"
+      >
+
+        <div class="logo-symbol">
+          <span>✦</span>
+        </div>
+
+        <div class="logo-name">
+
+          DHARMADEVAS
+
+          <small>
+            BLADE / TXT
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="#about">
+          Game
+        </a>
+
+        <a href="#systems">
+          Systems
+        </a>
+
+        <a href="#chapters">
+          Chapters
+        </a>
+
+        <a href="#download">
+          Download
+        </a>
+
+        <a
+          class="nav-download"
+          href="https://github.com/Xenos-10/code/releases/download/v1.0.0/DharmadevasBladeTxt-v1.0.0.zip"
+        >
+          PLAY
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =======================================================
+       GAME HEADER
+  ======================================================== -->
+
+  <div
+    class="game-header"
+    id="top"
+  >
+
+    <div class="status">
+
+      <span class="status-dot"></span>
+
+      PLAYABLE NOW
+
+    </div>
+
+
+    <h1 class="game-title">
+
+      <span>
+        DHARMADEVAS
+      </span>
+
+      <span class="accent">
+        BLADE
+      </span>
+
     </h1>
 
-    <div class="divider"></div>
 
-    <p class="subtitle">
-      Your choice. <span>Your destiny.</span> The adventure begins soon.
+    <div class="game-type">
+
+      TEXT RPG // STORY-DRIVEN ADVENTURE
+
+    </div>
+
+
+    <p class="game-description">
+
+      A text-based RPG inspired by the world, legends and
+      atmosphere of ancient Nepal.
+
+      Explore. Choose. Fight. Survive.
+
+      Your journey begins through words.
+
     </p>
 
 
+    <div class="game-actions">
+
+      <a
+        class="button button-primary"
+        href="https://github.com/Xenos-10/code/releases/download/v1.0.0/DharmadevasBladeTxt-v1.0.0.zip"
+      >
+        ▶ PLAY THE GAME
+      </a>
+
+      <a
+        class="button button-secondary"
+        href="#about"
+      >
+        LEARN MORE
+      </a>
+
+    </div>
+
+
+    <div class="release-info">
+
+      <div>
+
+        <strong>
+          RELEASE
+        </strong>
+
+        v1.0.0
+
+      </div>
+
+      <div>
+
+        <strong>
+          PLATFORM
+        </strong>
+
+        WINDOWS
+
+      </div>
+
+      <div>
+
+        <strong>
+          GENRE
+        </strong>
+
+        TEXT RPG
+
+      </div>
+
+      <div>
+
+        <strong>
+          STATUS
+        </strong>
+
+        PLAYABLE
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="tags">
-    <span class="tag">RPG</span>
-    <span class="tag hot">⚔️ Coming Soon</span>
-    <span class="tag">rupesh-joshi.com.np</span>
-  </div>
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main>
+
+
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
+
+    <section
+      id="about"
+      class="reveal"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          // THE GAME
+        </div>
+
+        <h2 class="section-title">
+          A JOURNEY<br>
+          WRITTEN IN WORDS
+        </h2>
+
+        <p class="section-description">
+
+          Dharmadevas Blade is a story-focused text RPG where
+          the world is presented through dialogue, choices,
+          exploration and combat.
+
+        </p>
+
+      </div>
+
+
+      <div class="about-grid">
+
+
+        <div class="about-copy">
+
+          <p>
+
+            Instead of controlling a character through a
+            three-dimensional world, you experience the
+            journey directly through the game's text,
+            choices and systems.
+
+          </p>
+
+          <p>
+
+            Travel through different regions, encounter
+            enemies, manage your inventory, develop your
+            character and make decisions as the story
+            unfolds.
+
+          </p>
+
+          <p>
+
+            The TXT edition is the current playable form of
+            the project — the foundation upon which the larger
+            Dharmadevas Blade game will continue to grow.
+
+          </p>
+
+        </div>
+
+
+        <div class="terminal">
+
+          <div class="terminal-bar">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </div>
+
+
+          <div class="terminal-content">
+
+            <div>
+              <span class="green">
+                SYSTEM
+              </span>
+              ::
+              DHARMADEVAS BLADE
+            </div>
+
+            <div>
+              <span class="blue">
+                VERSION
+              </span>
+              ::
+              1.0.0
+            </div>
+
+            <div>
+              <span class="blue">
+                PLATFORM
+              </span>
+              ::
+              WINDOWS
+            </div>
+
+            <div>
+              <span class="pink">
+                STATUS
+              </span>
+              ::
+              PLAYABLE
+            </div>
+
+            <br>
+
+            <div>
+              &gt; INITIALIZING JOURNEY...
+            </div>
+
+            <div>
+              &gt; LOADING WORLD...
+            </div>
+
+            <div>
+              &gt; YOUR STORY AWAITS_
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SYSTEMS
+    ====================================================== -->
+
+    <section
+      id="systems"
+      class="reveal"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          // GAMEPLAY
+        </div>
+
+        <h2 class="section-title">
+          YOUR JOURNEY.<br>
+          YOUR SYSTEMS.
+        </h2>
+
+        <p class="section-description">
+
+          The current TXT release brings together the core
+          gameplay systems needed to experience the beginning
+          of Dharmadevas Blade.
+
+        </p>
+
+      </div>
+
+
+      <div class="systems">
+
+
+        <article class="system">
+
+          <div class="system-number">
+            SYSTEM 01
+          </div>
+
+          <h3>
+            STORY
+          </h3>
+
+          <p>
+            Follow the narrative through dialogue,
+            encounters and player choices.
+          </p>
+
+        </article>
+
+
+        <article class="system">
+
+          <div class="system-number">
+            SYSTEM 02
+          </div>
+
+          <h3>
+            COMBAT
+          </h3>
+
+          <p>
+            Face enemies through turn-based actions
+            and strategic decisions.
+          </p>
+
+        </article>
+
+
+        <article class="system">
+
+          <div class="system-number">
+            SYSTEM 03
+          </div>
+
+          <h3>
+            INVENTORY
+          </h3>
+
+          <p>
+            Manage the items and resources you collect
+            throughout your journey.
+          </p>
+
+        </article>
+
+
+        <article class="system">
+
+          <div class="system-number">
+            SYSTEM 04
+          </div>
+
+          <h3>
+            PROGRESSION
+          </h3>
+
+          <p>
+            Track your character's growth as the adventure
+            continues.
+          </p>
+
+        </article>
+
+
+        <article class="system">
+
+          <div class="system-number">
+            SYSTEM 05
+          </div>
+
+          <h3>
+            EXPLORATION
+          </h3>
+
+          <p>
+            Move through regions and discover what lies
+            beyond the next encounter.
+          </p>
+
+        </article>
+
+
+        <article class="system">
+
+          <div class="system-number">
+            SYSTEM 06
+          </div>
+
+          <h3>
+            SAVES
+          </h3>
+
+          <p>
+            Preserve your progress and return to your
+            journey when you're ready.
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTERS
+    ====================================================== -->
+
+    <section
+      id="chapters"
+      class="reveal"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          // STORY
+        </div>
+
+        <h2 class="section-title">
+          THE CHAPTERS
+        </h2>
+
+        <p class="section-description">
+
+          Four chapters form the current story foundation
+          of the game.
+
+        </p>
+
+      </div>
+
+
+      <div class="chapters">
+
+
+        <article class="chapter">
+
+          <div class="chapter-number">
+            CHAPTER 01
+          </div>
+
+          <div>
+
+            <h3>
+              GORKHA
+            </h3>
+
+            <p>
+              Begin your journey.
+            </p>
+
+          </div>
+
+          <div class="chapter-status">
+            Available
+          </div>
+
+        </article>
+
+
+        <article class="chapter">
+
+          <div class="chapter-number">
+            CHAPTER 02
+          </div>
+
+          <div>
+
+            <h3>
+              COUNTRYSIDE
+            </h3>
+
+            <p>
+              Continue beyond the first region.
+            </p>
+
+          </div>
+
+          <div class="chapter-status">
+            Available
+          </div>
+
+        </article>
+
+
+        <article class="chapter">
+
+          <div class="chapter-number">
+            CHAPTER 03
+          </div>
+
+          <div>
+
+            <h3>
+              FOREST
+            </h3>
+
+            <p>
+              Enter a more dangerous region.
+            </p>
+
+          </div>
+
+          <div class="chapter-status">
+            Available
+          </div>
+
+        </article>
+
+
+        <article class="chapter">
+
+          <div class="chapter-number">
+            CHAPTER 04
+          </div>
+
+          <div>
+
+            <h3>
+              CAVE
+            </h3>
+
+            <p>
+              Descend further into the unknown.
+            </p>
+
+          </div>
+
+          <div class="chapter-status">
+            Available
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCREENSHOTS
+    ====================================================== -->
+
+    <section
+      id="screenshots"
+      class="reveal"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          // FROM THE GAME
+        </div>
+
+        <h2 class="section-title">
+          TRANSMISSIONS
+        </h2>
+
+        <p class="section-description">
+
+          A look inside the current playable build.
+
+        </p>
+
+      </div>
+
+
+      <div class="screenshots">
+
+
+        <div class="screenshot wide">
+
+          <span class="screenshot-label">
+            Gameplay
+          </span>
+
+        </div>
+
+
+        <div class="screenshot">
+
+          <span class="screenshot-label">
+            Combat
+          </span>
+
+        </div>
+
+
+        <div class="screenshot">
+
+          <span class="screenshot-label">
+            Inventory
+          </span>
+
+        </div>
+
+
+        <div class="screenshot wide">
+
+          <span class="screenshot-label">
+            World / Story
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DOWNLOAD
+    ====================================================== -->
+
+    <section
+      id="download"
+      class="download reveal"
+    >
+
+      <div class="download-panel">
+
+        <div class="download-grid">
+
+
+          <div>
+
+            <div class="section-label">
+              // CURRENT BUILD
+            </div>
+
+            <h2 class="download-title">
+              DHARMADEVAS BLADE v1.0.0
+            </h2>
+
+            <p class="download-text">
+
+              The first playable release is available now
+              for Windows.
+
+              Download the ZIP, extract it and launch the
+              game executable to begin.
+
+            </p>
+
+
+            <div class="download-meta">
+
+              <span>
+                VERSION:
+                <strong>1.0.0</strong>
+              </span>
+
+              <span>
+                PLATFORM:
+                <strong>WINDOWS</strong>
+              </span>
+
+              <span>
+                BUILD:
+                <strong>TXT</strong>
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <a
+            class="download-button"
+            href="https://github.com/Xenos-10/code/releases/download/v1.0.0/DharmadevasBladeTxt-v1.0.0.zip"
+          >
+            ↓ DOWNLOAD GAME
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ROADMAP
+    ====================================================== -->
+
+    <section
+      id="roadmap"
+      class="reveal"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          // PROJECT
+        </div>
+
+        <h2 class="section-title">
+          WHERE IT GOES NEXT
+        </h2>
+
+        <p class="section-description">
+
+          The TXT release is only the beginning of the
+          Dharmadevas Blade project.
+
+        </p>
+
+      </div>
+
+
+      <div class="roadmap">
+
+
+        <article class="roadmap-item active">
+
+          <div class="roadmap-status">
+            CURRENT
+          </div>
+
+          <h3>
+            TXT EDITION
+          </h3>
+
+          <p>
+            The playable text-based foundation of the game,
+            including story, exploration, combat and
+            progression systems.
+          </p>
+
+        </article>
+
+
+        <article class="roadmap-item">
+
+          <div class="roadmap-status">
+            FUTURE
+          </div>
+
+          <h3>
+            EXPANSION
+          </h3>
+
+          <p>
+            Continue expanding the world, story, regions,
+            encounters and gameplay systems.
+          </p>
+
+        </article>
+
+
+        <article class="roadmap-item">
+
+          <div class="roadmap-status">
+            LONG TERM
+          </div>
+
+          <h3>
+            THE LARGER GAME
+          </h3>
+
+          <p>
+            The long-term vision is to evolve the project
+            far beyond its current text-based form.
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="footer">
+
+      <div class="footer-title">
+
+        DHARMADEVAS BLADE
+
+        <span>
+          TEXT RPG · PLAYABLE NOW
+        </span>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a
+          href="https://github.com/Xenos-10/code"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+
+        <a href="#download">
+          Download
+        </a>
+
+        <a href="#top">
+          Back to Top
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 PRAYAS CO. · DHARMADEVAS BLADE
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
 
   <script>
-// Generate floating particles
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 35; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.animationDuration = (6 + Math.random() * 12) + 's';
-      p.style.animationDelay    = (Math.random() * 10) + 's';
-      p.style.width  = (Math.random() > 0.7 ? 3 : 2) + 'px';
-      p.style.height = p.style.width;
-      // Alternate a few particles to accent color
-      if (Math.random() > 0.75) p.style.background = '#ff2d6b';
-      container.appendChild(p);
+
+    /*
+     * Background particles
+     */
+
+    const background =
+      document.querySelector(".background");
+
+    for (let i = 0; i < 45; i++) {
+
+      const particle =
+        document.createElement("div");
+
+      particle.className = "particle";
+
+      particle.style.left =
+        Math.random() * 100 + "%";
+
+      particle.style.animationDuration =
+        (7 + Math.random() * 14) + "s";
+
+      particle.style.animationDelay =
+        Math.random() * 12 + "s";
+
+      particle.style.width =
+        Math.random() > 0.8 ? "3px" : "2px";
+
+      particle.style.height =
+        particle.style.width;
+
+      if (Math.random() > 0.72) {
+        particle.style.background =
+          "#ff2d6b";
+      }
+
+      background.appendChild(particle);
+
     }
+
+
+    /*
+     * Scroll reveal
+     */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach(
+            (entry) => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target.classList.add(
+                  "visible"
+                );
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach(
+      (element) => {
+
+        observer.observe(element);
+
+      }
+    );
+
   </script>
+
 </body>
 </html>
