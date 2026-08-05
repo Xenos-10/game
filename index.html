@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dharmadevas Blade TxT — A Nepali Text RPG</title>
 
-    <meta
-        name="description"
-        content="Dharmadevas Blade TxT — an adventure through ancient Nepal. A text-based RPG built around story, choices, combat and exploration."
-    >
+    <meta name="description"
+        content="Dharmadevas Blade TxT — an adventure through ancient Nepal. A text-based RPG built around story, choices, combat and exploration.">
 
     <meta name="theme-color" content="#05070b">
 
-    <link
-        rel="icon"
-        type="image/x-icon"
-        href="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade.ico"
-    >
+    <link rel="icon" type="image/x-icon"
+        href="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+        rel="stylesheet">
 
     <style>
         :root {
@@ -44,7 +39,7 @@
             --muted: #8794a1;
             --dark: #020307;
 
-            --border: rgba(255,255,255,0.09);
+            --border: rgba(255, 255, 255, 0.09);
 
             --max: 1250px;
         }
@@ -61,11 +56,9 @@
 
         body {
             background:
-                radial-gradient(
-                    circle at 50% 10%,
+                radial-gradient(circle at 50% 10%,
                     rgba(0, 234, 255, 0.07),
-                    transparent 35%
-                ),
+                    transparent 35%),
                 var(--bg);
 
             color: var(--text);
@@ -80,15 +73,11 @@
             inset: 0;
 
             background:
-                linear-gradient(
-                    rgba(255,255,255,0.018) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.018) 1px,
-                    transparent 1px
-                );
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px),
+                linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px);
 
             background-size: 60px 60px;
 
@@ -103,12 +92,10 @@
             inset: 0;
 
             background:
-                repeating-linear-gradient(
-                    0deg,
+                repeating-linear-gradient(0deg,
                     transparent 0px,
                     transparent 3px,
-                    rgba(0,0,0,0.13) 4px
-                );
+                    rgba(0, 0, 0, 0.13) 4px);
 
             pointer-events: none;
             z-index: 20;
@@ -200,13 +187,11 @@
             z-index: 100;
 
             background:
-                linear-gradient(
-                    180deg,
-                    rgba(2,4,8,0.96),
-                    rgba(2,4,8,0.76)
-                );
+                linear-gradient(180deg,
+                    rgba(2, 4, 8, 0.96),
+                    rgba(2, 4, 8, 0.76));
 
-            border-bottom: 1px solid rgba(0,234,255,0.12);
+            border-bottom: 1px solid rgba(0, 234, 255, 0.12);
 
             backdrop-filter: blur(14px);
         }
@@ -278,19 +263,19 @@
 
         .nav-links a:hover {
             color: var(--cyan);
-            text-shadow: 0 0 15px rgba(0,234,255,0.7);
+            text-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
         }
 
         .nav-download {
             padding: 10px 18px;
 
-            border: 1px solid rgba(0,234,255,0.45);
+            border: 1px solid rgba(0, 234, 255, 0.45);
 
             color: var(--cyan) !important;
 
             box-shadow:
-                inset 0 0 20px rgba(0,234,255,0.05),
-                0 0 20px rgba(0,234,255,0.05);
+                inset 0 0 20px rgba(0, 234, 255, 0.05),
+                0 0 20px rgba(0, 234, 255, 0.05);
         }
 
         .nav-download:hover {
@@ -329,11 +314,9 @@
             transform: translateY(-50%);
 
             background:
-                radial-gradient(
-                    circle,
-                    rgba(0,234,255,0.12),
-                    transparent 65%
-                );
+                radial-gradient(circle,
+                    rgba(0, 234, 255, 0.12),
+                    transparent 65%);
 
             filter: blur(20px);
         }
@@ -358,7 +341,7 @@
             margin-bottom: 28px;
 
             filter:
-                drop-shadow(0 0 25px rgba(0,234,255,0.15));
+                drop-shadow(0 0 25px rgba(0, 234, 255, 0.15));
         }
 
         .hero-kicker {
@@ -392,7 +375,7 @@
             -webkit-text-stroke: 1px var(--cyan);
 
             text-shadow:
-                0 0 20px rgba(0,234,255,0.35);
+                0 0 20px rgba(0, 234, 255, 0.35);
         }
 
         .hero-description {
@@ -447,19 +430,19 @@
             color: #020509;
 
             box-shadow:
-                0 0 20px rgba(0,234,255,0.22);
+                0 0 20px rgba(0, 234, 255, 0.22);
         }
 
         .button-primary:hover {
             box-shadow:
-                0 0 35px rgba(0,234,255,0.5);
+                0 0 35px rgba(0, 234, 255, 0.5);
         }
 
         .button-secondary {
-            border-color: rgba(255,255,255,0.15);
+            border-color: rgba(255, 255, 255, 0.15);
             color: white;
 
-            background: rgba(255,255,255,0.025);
+            background: rgba(255, 255, 255, 0.025);
         }
 
         .button-secondary:hover {
@@ -476,15 +459,15 @@
         .hero-frame {
             position: relative;
 
-            border: 1px solid rgba(0,234,255,0.3);
+            border: 1px solid rgba(0, 234, 255, 0.3);
 
             background: #030508;
 
             padding: 8px;
 
             box-shadow:
-                0 0 40px rgba(0,234,255,0.08),
-                20px 25px 80px rgba(0,0,0,0.6);
+                0 0 40px rgba(0, 234, 255, 0.08),
+                20px 25px 80px rgba(0, 0, 0, 0.6);
 
             transform: perspective(1200px) rotateY(-4deg);
         }
@@ -496,7 +479,7 @@
 
             inset: -1px;
 
-            border: 1px solid rgba(215,173,85,0.15);
+            border: 1px solid rgba(215, 173, 85, 0.15);
 
             pointer-events: none;
         }
@@ -519,7 +502,7 @@
 
             padding: 8px 13px;
 
-            background: rgba(2,4,8,0.88);
+            background: rgba(2, 4, 8, 0.88);
 
             border-left: 2px solid var(--cyan);
 
@@ -536,16 +519,14 @@
         ========================= */
 
         .release-bar {
-            border-top: 1px solid rgba(255,255,255,0.06);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
             background:
-                linear-gradient(
-                    90deg,
-                    rgba(0,234,255,0.04),
-                    rgba(215,173,85,0.035),
-                    rgba(255,49,92,0.04)
-                );
+                linear-gradient(90deg,
+                    rgba(0, 234, 255, 0.04),
+                    rgba(215, 173, 85, 0.035),
+                    rgba(255, 49, 92, 0.04));
         }
 
         .release-inner {
@@ -564,7 +545,7 @@
 
             gap: 12px;
 
-            border-right: 1px solid rgba(255,255,255,0.06);
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
 
             text-transform: uppercase;
 
@@ -602,11 +583,9 @@
             border: 1px solid var(--border);
 
             background:
-                linear-gradient(
-                    135deg,
-                    rgba(0,234,255,0.035),
-                    rgba(255,255,255,0.01)
-                );
+                linear-gradient(135deg,
+                    rgba(0, 234, 255, 0.035),
+                    rgba(255, 255, 255, 0.01));
 
             position: relative;
         }
@@ -624,7 +603,7 @@
 
             background: var(--gold);
 
-            box-shadow: 0 0 15px rgba(215,173,85,0.6);
+            box-shadow: 0 0 15px rgba(215, 173, 85, 0.6);
         }
 
         .story-card h3 {
@@ -645,15 +624,15 @@
             font-size: 1.05rem;
         }
 
-        .story-card p + p {
+        .story-card p+p {
             margin-top: 15px;
         }
 
         .prologue-image {
-            border: 1px solid rgba(215,173,85,0.22);
+            border: 1px solid rgba(215, 173, 85, 0.22);
 
             box-shadow:
-                0 0 35px rgba(215,173,85,0.07);
+                0 0 35px rgba(215, 173, 85, 0.07);
         }
 
         /* =========================
@@ -676,11 +655,9 @@
             min-height: 200px;
 
             background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.035),
-                    rgba(255,255,255,0.012)
-                );
+                linear-gradient(145deg,
+                    rgba(255, 255, 255, 0.035),
+                    rgba(255, 255, 255, 0.012));
 
             border: 1px solid var(--border);
 
@@ -692,7 +669,7 @@
         .feature:hover {
             transform: translateY(-6px);
 
-            border-color: rgba(0,234,255,0.3);
+            border-color: rgba(0, 234, 255, 0.3);
         }
 
         .feature-number {
@@ -788,10 +765,8 @@
             padding: 30px 18px 15px;
 
             background:
-                linear-gradient(
-                    transparent,
-                    rgba(0,0,0,0.92)
-                );
+                linear-gradient(transparent,
+                    rgba(0, 0, 0, 0.92));
 
             color: white;
 
@@ -817,7 +792,7 @@
         }
 
         .showcase-main {
-            border: 1px solid rgba(0,234,255,0.2);
+            border: 1px solid rgba(0, 234, 255, 0.2);
 
             padding: 7px;
 
@@ -857,11 +832,9 @@
             padding: 130px 0;
 
             background:
-                radial-gradient(
-                    ellipse at center,
-                    rgba(0,234,255,0.09),
-                    transparent 65%
-                );
+                radial-gradient(ellipse at center,
+                    rgba(0, 234, 255, 0.09),
+                    transparent 65%);
         }
 
         .download-panel {
@@ -871,14 +844,12 @@
 
             padding: 70px 30px;
 
-            border: 1px solid rgba(0,234,255,0.25);
+            border: 1px solid rgba(0, 234, 255, 0.25);
 
             background:
-                linear-gradient(
-                    135deg,
-                    rgba(0,234,255,0.04),
-                    rgba(215,173,85,0.025)
-                );
+                linear-gradient(135deg,
+                    rgba(0, 234, 255, 0.04),
+                    rgba(215, 173, 85, 0.025));
 
             overflow: hidden;
         }
@@ -954,7 +925,7 @@
             letter-spacing: 0.15em;
 
             box-shadow:
-                0 0 35px rgba(0,234,255,0.2);
+                0 0 35px rgba(0, 234, 255, 0.2);
 
             transition: 0.25s ease;
         }
@@ -963,7 +934,7 @@
             transform: translateY(-5px);
 
             box-shadow:
-                0 0 55px rgba(0,234,255,0.45);
+                0 0 55px rgba(0, 234, 255, 0.45);
         }
 
         .download-button small {
@@ -1003,7 +974,7 @@
 
             border: 1px solid var(--border);
 
-            background: rgba(255,255,255,0.015);
+            background: rgba(255, 255, 255, 0.015);
         }
 
         .requirement h3 {
@@ -1029,7 +1000,7 @@
         ========================= */
 
         footer {
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
 
             padding: 45px 0;
 
@@ -1167,7 +1138,7 @@
 
                 border-right: none;
 
-                border-bottom: 1px solid rgba(255,255,255,0.06);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             }
 
             .release-item:last-child {
@@ -1198,795 +1169,958 @@
                 justify-content: center;
             }
         }
+
+        /* =========================
+   CREDITS
+========================= */
+
+        .credits-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 50px;
+        }
+
+        .credit-card {
+            display: flex;
+            align-items: center;
+
+            gap: 22px;
+
+            min-height: 105px;
+
+            padding: 22px 25px;
+
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.035),
+                    rgba(255, 255, 255, 0.012));
+
+            border: 1px solid var(--border);
+
+            position: relative;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .credit-card:last-child {
+            grid-column: 1 / -1;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-4px);
+
+            border-color: rgba(0, 234, 255, 0.3);
+
+            background:
+                linear-gradient(135deg,
+                    rgba(0, 234, 255, 0.055),
+                    rgba(255, 255, 255, 0.015));
+        }
+
+        .credit-number {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 2rem;
+
+            line-height: 1;
+
+            color: var(--cyan);
+
+            opacity: 0.5;
+
+            min-width: 35px;
+        }
+
+        .credit-card h3 {
+            font-family: "Cinzel", serif;
+
+            color: white;
+
+            font-size: 1.15rem;
+
+            margin-bottom: 5px;
+        }
+
+        .credit-card p {
+            color: var(--muted);
+
+            font-size: 0.78rem;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+        .credits-footer {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 45px;
+
+            color: var(--muted);
+
+            font-size: 0.75rem;
+
+            letter-spacing: 0.25em;
+
+            text-transform: uppercase;
+        }
+
+        .credits-footer span {
+            color: var(--gold-light);
+        }
+
+        .credits-footer i {
+            color: var(--red);
+
+            font-style: normal;
+
+            font-size: 1.2rem;
+        }
+
+        .credits-footer a {
+            color: var(--cyan);
+
+            transition: 0.2s ease;
+        }
+
+        .credits-footer a:hover {
+            text-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
+        }
     </style>
 </head>
 
 <body>
 
-<!-- =========================================================
+    <!-- =========================================================
      NAVIGATION
 ========================================================= -->
 
-<header class="nav">
-    <div class="container nav-inner">
+    <header class="nav">
+        <div class="container nav-inner">
 
-        <a href="#top" class="brand">
+            <a href="#top" class="brand">
 
-            <img
-                src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade_icon.png"
-                alt="Dharmadevas Blade"
-            >
+                <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade_icon.png"
+                    alt="Dharmadevas Blade">
 
-            <div class="brand-name">
-                DHARMADEVAS BLADE
-                <small>TEXT RPG</small>
-            </div>
+                <div class="brand-name">
+                    DHARMADEVAS BLADE
+                    <small>TEXT RPG</small>
+                </div>
 
-        </a>
-
-        <nav class="nav-links">
-
-            <a href="#game">Game</a>
-            <a href="#gameplay">Gameplay</a>
-            <a href="#screenshots">Screenshots</a>
-            <a href="#requirements">Requirements</a>
-
-            <a
-                class="nav-download"
-                href="https://github.com/Xenos-10/game/releases/download/v1.0.0/DharmadevasBladeTxT-v1.0.0.zip"
-            >
-                Download
             </a>
 
-        </nav>
+            <nav class="nav-links">
+                <a href="#game">Game</a>
+                <a href="#gameplay">Gameplay</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#credits">Credits</a>
+                <a href="#requirements">Requirements</a>
 
-    </div>
-</header>
+                <a class="nav-download"
+                    href="https://github.com/Xenos-10/game/releases/download/v1.0.0/DharmadevasBladeTxT-v1.0.0.zip">
+                    Download
+                </a>
+            </nav>
+
+        </div>
+    </header>
 
 
-<main id="top">
+    <main id="top">
 
-<!-- =========================================================
+        <!-- =========================================================
      HERO
 ========================================================= -->
 
-<section class="hero">
+        <section class="hero">
 
-    <div class="container hero-content">
+            <div class="container hero-content">
 
-        <div>
+                <div>
 
-            <div class="hero-kicker">
-                A TEXT-BASED RPG • VERSION 1.0.0
-            </div>
+                    <div class="hero-kicker">
+                        A TEXT-BASED RPG • VERSION 1.0.0
+                    </div>
 
-            <img
-                class="hero-logo"
-                src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade_logo_bgfree.png"
-                alt="Dharmadevas Blade"
-            >
+                    <img class="hero-logo"
+                        src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade_logo_bgfree.png"
+                        alt="Dharmadevas Blade">
 
-            <h1 class="hero-title">
-                YOUR STORY.
-                <span>YOUR BLADE.</span>
-            </h1>
+                    <h1 class="hero-title">
+                        YOUR STORY.
+                        <span>YOUR BLADE.</span>
+                    </h1>
 
-            <p class="hero-description">
-                Enter a world inspired by the landscapes, legends and
-                ancient atmosphere of Nepal. Make choices, face enemies,
-                manage your resources and determine how your journey unfolds.
-            </p>
+                    <p class="hero-description">
+                        Enter a world inspired by the landscapes, legends and
+                        ancient atmosphere of Nepal. Make choices, face enemies,
+                        manage your resources and determine how your journey unfolds.
+                    </p>
 
-            <div class="hero-actions">
+                    <div class="hero-actions">
 
-                <a
-                    class="button button-primary"
-                    href="https://github.com/Xenos-10/game/releases/download/v1.0.0/DharmadevasBladeTxT-v1.0.0.zip"
-                >
-                    ↓ &nbsp; Download Game
-                </a>
+                        <a class="button button-primary"
+                            href="https://github.com/Xenos-10/game/releases/download/v1.0.0/DharmadevasBladeTxT-v1.0.0.zip">
+                            ↓ &nbsp; Download Game
+                        </a>
 
-                <a
-                    class="button button-secondary"
-                    href="#gameplay"
-                >
-                    Explore Gameplay
-                </a>
+                        <a class="button button-secondary" href="#gameplay">
+                            Explore Gameplay
+                        </a>
 
-            </div>
+                    </div>
 
-        </div>
+                </div>
 
 
-        <div class="hero-visual">
+                <div class="hero-visual">
 
-            <div class="hero-frame">
+                    <div class="hero-frame">
 
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/title_screen.png"
-                    alt="Dharmadevas Blade title screen"
-                >
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/title_screen.png"
+                            alt="Dharmadevas Blade title screen">
 
-                <div class="hero-frame-label">
-                    PLAYABLE NOW • WINDOWS
+                        <div class="hero-frame-label">
+                            PLAYABLE NOW • WINDOWS
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
-
-    </div>
-
-</section>
+        </section>
 
 
-<!-- =========================================================
+        <!-- =========================================================
      RELEASE STATUS
 ========================================================= -->
 
-<div class="release-bar">
+        <div class="release-bar">
 
-    <div class="container release-inner">
+            <div class="container release-inner">
 
-        <div class="release-item">
-            <strong>V1.0.0</strong>
-            Release
+                <div class="release-item">
+                    <strong>V1.0.0</strong>
+                    Release
+                </div>
+
+                <div class="release-item">
+                    <strong>TXT RPG</strong>
+                    Genre
+                </div>
+
+                <div class="release-item">
+                    <strong>WINDOWS</strong>
+                    Platform
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="release-item">
-            <strong>TXT RPG</strong>
-            Genre
-        </div>
 
-        <div class="release-item">
-            <strong>WINDOWS</strong>
-            Platform
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
+        <!-- =========================================================
      GAME
 ========================================================= -->
 
-<section class="section" id="game">
+        <section class="section" id="game">
 
-    <div class="container">
+            <div class="container">
 
-        <div class="section-label">
-            THE JOURNEY
-        </div>
+                <div class="section-label">
+                    THE JOURNEY
+                </div>
 
-        <h2 class="section-title">
-            A STORY WRITTEN THROUGH <span>CHOICE</span>
-        </h2>
+                <h2 class="section-title">
+                    A STORY WRITTEN THROUGH <span>CHOICE</span>
+                </h2>
 
-        <p class="section-description">
-            Dharmadevas Blade TxT is a text-based role-playing game
-            where the world is presented through dialogue, decisions,
-            exploration and combat.
-        </p>
-
-
-        <div class="game-grid" style="margin-top:60px;">
-
-            <div class="story-card">
-
-                <h3>Enter the world.</h3>
-
-                <p>
-                    The adventure begins with a prologue that introduces
-                    the world and sets the foundation for the journey ahead.
+                <p class="section-description">
+                    Dharmadevas Blade TxT is a text-based role-playing game
+                    where the world is presented through dialogue, decisions,
+                    exploration and combat.
                 </p>
 
-                <p>
-                    From there, your decisions determine what happens next.
-                    Explore regions, encounter enemies, discover items,
-                    learn abilities and survive the battles ahead.
-                </p>
 
-                <p>
-                    There is no giant open-world map hiding behind the
-                    interface. The world is delivered through text —
-                    allowing the story itself to remain at the center
-                    of the experience.
-                </p>
+                <div class="game-grid" style="margin-top:60px;">
+
+                    <div class="story-card">
+
+                        <h3>Enter the world.</h3>
+
+                        <p>
+                            The adventure begins with a prologue that introduces
+                            the world and sets the foundation for the journey ahead.
+                        </p>
+
+                        <p>
+                            From there, your decisions determine what happens next.
+                            Explore regions, encounter enemies, discover items,
+                            learn abilities and survive the battles ahead.
+                        </p>
+
+                        <p>
+                            There is no giant open-world map hiding behind the
+                            interface. The world is delivered through text —
+                            allowing the story itself to remain at the center
+                            of the experience.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <img class="prologue-image"
+                            src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/prologue.png"
+                            alt="Dharmadevas Blade prologue">
+
+                    </div>
+
+                </div>
 
             </div>
 
-
-            <div>
-
-                <img
-                    class="prologue-image"
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/prologue.png"
-                    alt="Dharmadevas Blade prologue"
-                >
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+        </section>
 
 
-<!-- =========================================================
+        <!-- =========================================================
      FEATURES
 ========================================================= -->
 
-<section class="section" id="gameplay">
+        <section class="section" id="gameplay">
 
-    <div class="container">
+            <div class="container">
 
-        <div class="section-label">
-            GAMEPLAY SYSTEMS
-        </div>
+                <div class="section-label">
+                    GAMEPLAY SYSTEMS
+                </div>
 
-        <h2 class="section-title">
-            EVERY DECISION <span>MATTERS</span>
-        </h2>
+                <h2 class="section-title">
+                    EVERY DECISION <span>MATTERS</span>
+                </h2>
 
-        <p class="section-description">
-            The game combines traditional RPG systems with a text-driven
-            presentation.
-        </p>
-
-
-        <div class="features">
-
-            <article class="feature">
-
-                <div class="feature-number">01</div>
-
-                <h3>Choice-Based Story</h3>
-
-                <p>
-                    Progress through dialogue and choices that determine
-                    how your journey continues.
+                <p class="section-description">
+                    The game combines traditional RPG systems with a text-driven
+                    presentation.
                 </p>
 
-            </article>
+
+                <div class="features">
+
+                    <article class="feature">
+
+                        <div class="feature-number">01</div>
+
+                        <h3>Choice-Based Story</h3>
+
+                        <p>
+                            Progress through dialogue and choices that determine
+                            how your journey continues.
+                        </p>
+
+                    </article>
 
 
-            <article class="feature">
+                    <article class="feature">
 
-                <div class="feature-number">02</div>
+                        <div class="feature-number">02</div>
 
-                <h3>Turn-Based Combat</h3>
+                        <h3>Turn-Based Combat</h3>
 
-                <p>
-                    Attack, defend, use abilities and manage your resources
-                    while facing enemies.
-                </p>
+                        <p>
+                            Attack, defend, use abilities and manage your resources
+                            while facing enemies.
+                        </p>
 
-            </article>
-
-
-            <article class="feature">
-
-                <div class="feature-number">03</div>
-
-                <h3>Inventory</h3>
-
-                <p>
-                    Collect items and use them when they are needed during
-                    your adventure.
-                </p>
-
-            </article>
+                    </article>
 
 
-            <article class="feature">
+                    <article class="feature">
 
-                <div class="feature-number">04</div>
+                        <div class="feature-number">03</div>
 
-                <h3>Abilities & Spells</h3>
+                        <h3>Inventory</h3>
 
-                <p>
-                    Develop your character through abilities and combat
-                    options.
-                </p>
+                        <p>
+                            Collect items and use them when they are needed during
+                            your adventure.
+                        </p>
 
-            </article>
-
-
-            <article class="feature">
-
-                <div class="feature-number">05</div>
-
-                <h3>Enemies & Encounters</h3>
-
-                <p>
-                    Face different enemies and encounters throughout the
-                    regions of the game.
-                </p>
-
-            </article>
+                    </article>
 
 
-            <article class="feature">
+                    <article class="feature">
 
-                <div class="feature-number">06</div>
+                        <div class="feature-number">04</div>
 
-                <h3>Save Your Journey</h3>
+                        <h3>Abilities & Spells</h3>
 
-                <p>
-                    Save your progress and return to your adventure later.
-                </p>
+                        <p>
+                            Develop your character through abilities and combat
+                            options.
+                        </p>
 
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
+                    </article>
 
 
-<!-- =========================================================
+                    <article class="feature">
+
+                        <div class="feature-number">05</div>
+
+                        <h3>Enemies & Encounters</h3>
+
+                        <p>
+                            Face different enemies and encounters throughout the
+                            regions of the game.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature">
+
+                        <div class="feature-number">06</div>
+
+                        <h3>Save Your Journey</h3>
+
+                        <p>
+                            Save your progress and return to your adventure later.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
      SCREENSHOTS
 ========================================================= -->
 
-<section class="section" id="screenshots">
+        <section class="section" id="screenshots">
 
-    <div class="container">
+            <div class="container">
 
-        <div class="section-label">
-            IN-GAME
-        </div>
+                <div class="section-label">
+                    IN-GAME
+                </div>
 
-        <h2 class="section-title">
-            SEE THE <span>ADVENTURE</span>
-        </h2>
+                <h2 class="section-title">
+                    SEE THE <span>ADVENTURE</span>
+                </h2>
 
-        <p class="section-description">
-            A look at the systems and interface that make up
-            Dharmadevas Blade TxT.
-        </p>
+                <p class="section-description">
+                    A look at the systems and interface that make up
+                    Dharmadevas Blade TxT.
+                </p>
 
 
-        <div class="gallery">
+                <div class="gallery">
 
-            <div class="gallery-item">
+                    <div class="gallery-item">
 
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/combat.png"
-                    alt="Combat"
-                    loading="lazy"
-                >
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/combat.png"
+                            alt="Combat" loading="lazy">
 
-                <div class="gallery-caption">
-                    Combat
+                        <div class="gallery-caption">
+                            Combat
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_attacks.png"
+                            alt="Attack choices" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Choose your attack
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_spell.png"
+                            alt="Spell selection" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Abilities & spells
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/in-battle_items.png"
+                            alt="Items during battle" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Battle inventory
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/use_items.png"
+                            alt="Using items" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Use items
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/inventory.png"
+                            alt="Inventory" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Inventory
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_options.png"
+                            alt="Story choices" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Story choices
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-item">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_save.png"
+                            alt="Save options" loading="lazy">
+
+                        <div class="gallery-caption">
+                            Save your progress
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
-
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_attacks.png"
-                    alt="Attack choices"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Choose your attack
-                </div>
-
-            </div>
+        </section>
 
 
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_spell.png"
-                    alt="Spell selection"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Abilities & spells
-                </div>
-
-            </div>
-
-
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/in-battle_items.png"
-                    alt="Items during battle"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Battle inventory
-                </div>
-
-            </div>
-
-
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/use_items.png"
-                    alt="Using items"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Use items
-                </div>
-
-            </div>
-
-
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/inventory.png"
-                    alt="Inventory"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Inventory
-                </div>
-
-            </div>
-
-
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_options.png"
-                    alt="Story choices"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Story choices
-                </div>
-
-            </div>
-
-
-            <div class="gallery-item">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_save.png"
-                    alt="Save options"
-                    loading="lazy"
-                >
-
-                <div class="gallery-caption">
-                    Save your progress
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
+        <!-- =========================================================
      SHOWCASE
 ========================================================= -->
 
-<section class="section">
+        <section class="section">
 
-    <div class="container">
+            <div class="container">
 
-        <div class="section-label">
-            THE INTERFACE
-        </div>
+                <div class="section-label">
+                    THE INTERFACE
+                </div>
 
-        <h2 class="section-title">
-            SIMPLE INTERFACE. <span>DEEPER WORLD.</span>
-        </h2>
+                <h2 class="section-title">
+                    SIMPLE INTERFACE. <span>DEEPER WORLD.</span>
+                </h2>
 
-        <p class="section-description">
-            Everything you need is presented directly through the game's
-            interface, keeping the focus on the story and your decisions.
-        </p>
-
-
-        <div class="showcase">
-
-            <div class="showcase-main">
-
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/main_menu.png"
-                    alt="Dharmadevas Blade main menu"
-                    loading="lazy"
-                >
-
-            </div>
+                <p class="section-description">
+                    Everything you need is presented directly through the game's
+                    interface, keeping the focus on the story and your decisions.
+                </p>
 
 
-            <div class="showcase-side">
+                <div class="showcase">
 
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_options.png"
-                    alt="Game options"
-                    loading="lazy"
-                >
+                    <div class="showcase-main">
 
-                <img
-                    src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_save.png"
-                    alt="Save system"
-                    loading="lazy"
-                >
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/main_menu.png"
+                            alt="Dharmadevas Blade main menu" loading="lazy">
+
+                    </div>
+
+
+                    <div class="showcase-side">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_options.png"
+                            alt="Game options" loading="lazy">
+
+                        <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/screenshots/choose_save.png"
+                            alt="Save system" loading="lazy">
+
+                    </div>
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
+        <!-- =========================================================
+     CREDITS
+========================================================= -->
 
-    </div>
+        <section class="section" id="credits">
 
-</section>
+            <div class="container">
+
+                <div class="section-label">
+                    THE PEOPLE BEHIND THE GAME
+                </div>
+
+                <h2 class="section-title">
+                    <span>CREDITS</span>
+                </h2>
+
+                <p class="section-description">
+                    Dharmadevas Blade TxT is a project by
+                    <strong style="color: var(--gold-light);">PRAYAS</strong>,
+                    part of
+                    <a href="https://www.rupesh-joshi.com.np/" target="_blank" rel="noopener"
+                        style="color: var(--cyan);">TVASTR</a>.
+                </p>
 
 
-<!-- =========================================================
+                <div class="credits-grid">
+
+                    <div class="credit-card">
+                        <div class="credit-number">01</div>
+                        <div>
+                            <h3>Rupesh Joshi</h3>
+                            <p>Programming · Creative · Project Lead</p>
+                        </div>
+                    </div>
+
+
+                    <div class="credit-card">
+                        <div class="credit-number">02</div>
+                        <div>
+                            <h3>Pranjal Khanal</h3>
+                            <p>Programming</p>
+                        </div>
+                    </div>
+
+
+                    <div class="credit-card">
+                        <div class="credit-number">03</div>
+                        <div>
+                            <h3>Udison Mulmi Shrestha</h3>
+                            <p>Programming · Creative</p>
+                        </div>
+                    </div>
+
+
+                    <div class="credit-card">
+                        <div class="credit-number">04</div>
+                        <div>
+                            <h3>Saroj Thakur</h3>
+                            <p>Programming · Creative</p>
+                        </div>
+                    </div>
+
+
+                    <div class="credit-card">
+                        <div class="credit-number">05</div>
+                        <div>
+                            <h3>Prasanna Gurung</h3>
+                            <p>Programming</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="credits-footer">
+
+                    <span>PRAYAS</span>
+
+                    <i>×</i>
+
+                    <a href="https://www.rupesh-joshi.com.np/" target="_blank" rel="noopener">
+                        TVASTR
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================================================
      DOWNLOAD
 ========================================================= -->
 
-<section class="download-section" id="download">
+        <section class="download-section" id="download">
 
-    <div class="container">
+            <div class="container">
 
-        <div class="download-panel">
+                <div class="download-panel">
 
-            <div class="section-label" style="justify-content:center;">
-                RELEASE 01
+                    <div class="section-label" style="justify-content:center;">
+                        RELEASE 01
+                    </div>
+
+                    <h2 class="download-title">
+                        THE JOURNEY <span>BEGINS NOW.</span>
+                    </h2>
+
+                    <p class="download-text">
+                        Dharmadevas Blade TxT v1.0.0 is available for Windows.
+                    </p>
+
+                    <a class="download-button"
+                        href="https://github.com/Xenos-10/game/releases/download/v1.0.0/DharmadevasBladeTxT-v1.0.0.zip">
+
+                        <span>↓ &nbsp; DOWNLOAD DHARMADEVAS BLADE</span>
+
+                        <small>
+                            VERSION 1.0.0 • WINDOWS • ZIP
+                        </small>
+
+                    </a>
+
+                    <p class="download-note">
+                        The download is hosted through the GitHub release.
+                    </p>
+
+                </div>
+
             </div>
 
-            <h2 class="download-title">
-                THE JOURNEY <span>BEGINS NOW.</span>
-            </h2>
-
-            <p class="download-text">
-                Dharmadevas Blade TxT v1.0.0 is available for Windows.
-            </p>
-
-            <a
-                class="download-button"
-                href="https://github.com/Xenos-10/game/releases/download/v1.0.0/DharmadevasBladeTxT-v1.0.0.zip"
-            >
-
-                <span>↓ &nbsp; DOWNLOAD DHARMADEVAS BLADE</span>
-
-                <small>
-                    VERSION 1.0.0 • WINDOWS • ZIP
-                </small>
-
-            </a>
-
-            <p class="download-note">
-                The download is hosted through the GitHub release.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
+        </section>
 
 
-<!-- =========================================================
+        <!-- =========================================================
      REQUIREMENTS
 ========================================================= -->
 
-<section class="section" id="requirements">
+        <section class="section" id="requirements">
 
-    <div class="container">
+            <div class="container">
 
-        <div class="section-label">
-            BEFORE YOU PLAY
-        </div>
+                <div class="section-label">
+                    BEFORE YOU PLAY
+                </div>
 
-        <h2 class="section-title">
-            SYSTEM <span>REQUIREMENTS</span>
-        </h2>
+                <h2 class="section-title">
+                    SYSTEM <span>REQUIREMENTS</span>
+                </h2>
 
-        <p class="section-description">
-            Dharmadevas Blade TxT is designed as a lightweight text-based
-            RPG and does not require gaming hardware.
-        </p>
-
-
-        <div class="requirements">
-
-            <div class="requirement">
-
-                <h3>Operating System</h3>
-
-                <p>
-                    Windows PC capable of running the released executable.
+                <p class="section-description">
+                    Dharmadevas Blade TxT is designed as a lightweight text-based
+                    RPG and does not require gaming hardware.
                 </p>
+
+
+                <div class="requirements">
+
+                    <div class="requirement">
+
+                        <h3>Operating System</h3>
+
+                        <p>
+                            Windows PC capable of running the released executable.
+                        </p>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <h3>Storage</h3>
+
+                        <p>
+                            Sufficient storage for the downloaded game archive
+                            and extracted game files.
+                        </p>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <h3>Graphics</h3>
+
+                        <p>
+                            No dedicated gaming GPU is required for the
+                            text-based gameplay.
+                        </p>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <h3>Internet</h3>
+
+                        <p>
+                            Internet access is required to download the release.
+                            Gameplay itself is designed around the local game files.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
+        </section>
 
-            <div class="requirement">
-
-                <h3>Storage</h3>
-
-                <p>
-                    Sufficient storage for the downloaded game archive
-                    and extracted game files.
-                </p>
-
-            </div>
+    </main>
 
 
-            <div class="requirement">
-
-                <h3>Graphics</h3>
-
-                <p>
-                    No dedicated gaming GPU is required for the
-                    text-based gameplay.
-                </p>
-
-            </div>
-
-
-            <div class="requirement">
-
-                <h3>Internet</h3>
-
-                <p>
-                    Internet access is required to download the release.
-                    Gameplay itself is designed around the local game files.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- =========================================================
+    <!-- =========================================================
      FOOTER
 ========================================================= -->
 
-<footer>
+    <footer>
 
-    <div class="container footer-inner">
+        <div class="container footer-inner">
 
-        <div class="footer-brand">
+            <div class="footer-brand">
 
-            <img
-                src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade_icon.png"
-                alt=""
-            >
+                <img src="https://raw.githubusercontent.com/Xenos-10/game/main/assets/dharmadevas_blade_icon.png"
+                    alt="Dharmadevas Blade">
 
-            <span>
-                © 2026 Dharmadevas Blade TxT
-            </span>
+                <div>
+                    <span>
+                        © 2026 Rupesh Joshi. All rights reserved.
+                    </span>
 
-        </div>
+                    <small>
+                        Dharmadevas Blade TxT
+                    </small>
+                </div>
+
+            </div>
 
 
-        <div class="footer-links">
+            <div class="footer-links">
 
-            <a
-                href="https://github.com/Xenos-10/game"
-                target="_blank"
-                rel="noopener"
-            >
-                GitHub
-            </a>
+                <a href="https://github.com/Xenos-10" target="_blank" rel="noopener">
+                    GitHub
+                </a>
 
-            <a
-                href="https://github.com/Xenos-10/game/releases"
-                target="_blank"
-                rel="noopener"
-            >
-                Releases
-            </a>
+                <a href="https://github.com/Xenos-10/game/releases" target="_blank" rel="noopener">
+                    Releases
+                </a>
 
-            <a href="#top">
-                Back to Top ↑
-            </a>
+                <a href="#top">
+                    Back to Top ↑
+                </a>
+
+            </div>
 
         </div>
 
-    </div>
-
-</footer>
+    </footer>
 
 
-<script>
+    <script>
 
-    /*
-     * Small reveal animation.
-     * No external JavaScript libraries required.
-     */
+        /*
+         * Small reveal animation.
+         * No external JavaScript libraries required.
+         */
 
-    const observer = new IntersectionObserver(
-        entries => {
+        const observer = new IntersectionObserver(
+            entries => {
 
-            entries.forEach(entry => {
+                entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                    if (entry.isIntersecting) {
 
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
 
-                    observer.unobserve(entry.target);
+                        observer.unobserve(entry.target);
 
-                }
+                    }
 
-            });
+                });
 
-        },
-        {
-            threshold: 0.08
-        }
-    );
-
-
-    document
-        .querySelectorAll(
-            ".feature, .gallery-item, .story-card, .showcase-main, .showcase-side img, .requirement"
-        )
-        .forEach(element => {
-
-            element.style.opacity = "0";
-            element.style.transform = "translateY(20px)";
-            element.style.transition =
-                "opacity .7s ease, transform .7s ease";
-
-            observer.observe(element);
-
-        });
+            },
+            {
+                threshold: 0.08
+            }
+        );
 
 
-    /*
-     * Download button feedback.
-     */
+        document
+            .querySelectorAll(
+                ".feature, .gallery-item, .story-card, .showcase-main, .showcase-side img, .requirement"
+            )
+            .forEach(element => {
 
-    document
-        .querySelectorAll(".download-button, .nav-download")
-        .forEach(button => {
+                element.style.opacity = "0";
+                element.style.transform = "translateY(20px)";
+                element.style.transition =
+                    "opacity .7s ease, transform .7s ease";
 
-            button.addEventListener("click", () => {
-
-                const original = button.innerHTML;
-
-                if (button.classList.contains("download-button")) {
-
-                    button.innerHTML =
-                        "<span>↓ &nbsp; STARTING DOWNLOAD...</span>" +
-                        "<small>DHARMADEVAS BLADE TXt • V1.0.0</small>";
-
-                    setTimeout(() => {
-                        button.innerHTML = original;
-                    }, 2500);
-
-                }
+                observer.observe(element);
 
             });
 
-        });
 
-</script>
+        /*
+         * Download button feedback.
+         */
+
+        document
+            .querySelectorAll(".download-button, .nav-download")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const original = button.innerHTML;
+
+                    if (button.classList.contains("download-button")) {
+
+                        button.innerHTML =
+                            "<span>↓ &nbsp; STARTING DOWNLOAD...</span>" +
+                            "<small>DHARMADEVAS BLADE TXt • V1.0.0</small>";
+
+                        setTimeout(() => {
+                            button.innerHTML = original;
+                        }, 2500);
+
+                    }
+
+                });
+
+            });
+
+    </script>
 
 </body>
+
 </html>
